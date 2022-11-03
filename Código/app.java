@@ -1,5 +1,7 @@
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class App {
@@ -15,8 +17,20 @@ public class App {
 	}
 
     public static void main(String[] args) {
-        List<Integer> conjunto = generateConjunto(6);
-        System.out.println(conjunto);
-        System.out.println(SomaSubconjunto.subconjuntos(conjunto, 12));
+        Map<Integer, Long> tempoPorTamanhoVetor = new HashMap<Integer, Long>();
+        long tempoMedio = 0;
+        for(int i = 2; tempoMedio <= 4000; i++) {
+            List<Integer> conjunto = generateConjunto(i);
+            long tempo = 0;
+            for(int j = 0; j < 150; j++) {
+                tempo = System.currentTimeMillis();
+                SomaSubconjunto.subconjuntos(conjunto, (int) Math.round(conjunto.stream().mapToInt(p -> p).average().orElse(0)));
+                tempo = System.currentTimeMillis() - tempo;
+                tempoMedio += tempo;
+            }
+            tempoMedio /= 150;
+            tempoPorTamanhoVetor.put(i, tempoMedio);
+        }
+        System.out.println(tempoPorTamanhoVetor);
     }
 }
