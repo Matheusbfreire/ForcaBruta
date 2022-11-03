@@ -1,7 +1,10 @@
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 
-public class app {
-	public static List<Integer> generateConjunto(int tam) {
+public class App {
+    
+    public static List<Integer> generateConjunto(int tam) {
 		List<Integer> conjunto = new LinkedList<Integer>();
 		Random random = new Random();
 		for(int i=0; i<tam; i++) {
@@ -12,10 +15,8 @@ public class app {
 	}
 
     public static void main(String[] args) {
-        List<Integer> lista = generateConjunto(5);
-
-        for(int i : lista) {
-            System.out.println(i);
-        }
+        List<Integer> conjunto = generateConjunto(6);
+        System.out.println(conjunto);
+        System.out.println(SomaSubconjunto.subconjuntos(conjunto, 12));
     }
 }
